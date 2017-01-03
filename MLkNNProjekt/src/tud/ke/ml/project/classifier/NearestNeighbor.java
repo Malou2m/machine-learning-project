@@ -53,6 +53,12 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 
 	@Override
 	protected Map<Object, Double> getWeightedVotes(List<Pair<List<Object>, Double>> subset) {
+		Map<Object, Double> votes = new HashMap<Object, Double>();
+		for(Pair<List<Object>, Double> instance : subset){
+			Object i_class = instance.getA().get(getClassAttribute());
+			//votes.putIfAbsent(i_class, 0.00);
+			//TODO hier fehlt mir ein Ansatz zum bestimmen, verstehe aber die übergabeparameter auch nicht
+		}
 		throw new NotImplementedException();
 	}
 
@@ -72,7 +78,12 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 
 	@Override
 	protected Object vote(List<Pair<List<Object>, Double>> subset) {
-		return getWinner(getUnweightedVotes(subset));
+		if(isInverseWeighting()){
+			return getWinner(getWeightedVotes(subset));
+		}else{
+			return getWinner(getUnweightedVotes(subset));
+		}
+
 	}
 
 	@Override
@@ -83,7 +94,12 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		// Assign a distance to each instance
 		for(List<Object> instance : this.data){
 			if(instance != data){
-				double d = determineManhattanDistance(instance, data);
+				double d;
+				if(getMetric()==1){
+					d = determineEuclideanDistance(instance, data);
+				}else {
+					d = determineManhattanDistance(instance, data);
+				}
 				instance_distance.add(new Pair<List<Object>, Double>(instance, d));
 			}
 		}
@@ -106,7 +122,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 	}
 
 	@Override
-	protected double determineManhattanDistance(List<Object> instance1, List<Object> instance2) {
+	protected double determineEuclideanDistance(List<Object> instance1, List<Object> instance2) {
 		// Do not consider missing values
 		double distance = 0.00;
 		if(instance1.size() == instance2.size()){
@@ -124,21 +140,16 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 					else if(attribute1.getClass().equals(Double.class) &&
 							attribute2.getClass().equals(Double.class)){
 							// normalized numeric value
-							Double[] min_max = getMinAndMax(i);
-							Double norm1 = ((Double)attribute1 - min_max[0])/(min_max[1] - min_max[0]);  
-							Double norm2 = ((Double)attribute2 - min_max[0])/(min_max[1] - min_max[0]); 
-							if(norm1 > norm2){
-								distance += norm1-norm2;
-							}else{
-								distance += norm2-norm1;
-							}
+							Double doub1=new Double(attribute1.toString());
+							Double doub2=new Double(attribute2.toString());
+							distance+=Math.pow(doub1-doub2,2);
 					}
 					else{
 						System.out.println("Invalide attribute types or types does not match.");
 					}
 				}
 			}
-			return distance;
+			return Math.sqrt(distance);//TODO is the square right even if we consider Nominal attributes?
 		}
 		else{
 			System.out.println("Distance cannot be computed, as both instances don't have the"
@@ -161,8 +172,45 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 	}
 
 	@Override
-	protected double determineEuclideanDistance(List<Object> instance1, List<Object> instance2) {
-		throw new NotImplementedException();
+	protected double determineManhattanDistance(List<Object> instance1, List<Object> instance2) {
+		// Do not consider missing values
+		double distance = 0.00;
+		if(instance1.size() == instance2.size()){
+			for(int i = 0; i<instance1.size(); i++){
+				Object attribute1 = instance1.get(i);
+				Object attribute2 = instance2.get(i);
+				// Doesn't change the distance if both attributes are equal
+				if(!attribute1.equals(attribute2)){
+					// 0/1 Distance for nominal attributes
+					if(attribute1.getClass().equals(String.class) &&
+							attribute2.getClass().equals(String.class)){
+						distance += 1;
+					}
+					// difference for numeric attributes
+					else if(attribute1.getClass().equals(Double.class) &&
+							attribute2.getClass().equals(Double.class)){
+						// normalized numeric value
+						Double[] min_max = getMinAndMax(i);
+						Double norm1 = ((Double)attribute1 - min_max[0])/(min_max[1] - min_max[0]);
+						Double norm2 = ((Double)attribute2 - min_max[0])/(min_max[1] - min_max[0]);
+						if(norm1 > norm2){
+							distance += norm1-norm2;
+						}else{
+							distance += norm2-norm1;
+						}
+					}
+					else{
+						System.out.println("Invalide attribute types or types does not match.");
+					}
+				}
+			}
+			return distance;
+		}
+		else{
+			System.out.println("Distance cannot be computed, as both instances don't have the"
+					+ "same length");
+			return -999.99;
+		}
 	}
 
 	@Override
