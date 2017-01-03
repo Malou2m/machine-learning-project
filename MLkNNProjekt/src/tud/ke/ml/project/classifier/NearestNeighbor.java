@@ -30,7 +30,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
  * PLEASE INSERT YOUR MATRIKEL NUMBER HERE! 
  * 
  * ---------------------------------------------*/
-		return("2346827, joelHier, danielHier");
+		return("2346827, joelHier, 2709600");
 	}
 
 	@Override
