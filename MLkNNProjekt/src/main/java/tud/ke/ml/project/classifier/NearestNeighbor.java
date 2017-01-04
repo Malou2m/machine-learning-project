@@ -108,9 +108,9 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 			@Override
 		    public int compare(Pair<List<Object>, Double> p1, Pair<List<Object>, Double> p2) {
 		        if(p1.getB() < p2.getB()){
-		            return 1;
-		        } else {
 		            return -1;
+		        } else {
+		            return 1;
 		        }
 		    }
 		});
@@ -126,7 +126,8 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		// Do not consider missing values
 		double distance = 0.00;
 		if(instance1.size() == instance2.size()){
-			for(int i = 0; i<instance1.size(); i++){
+                        // Does not compute the distance between the class attributes!
+			for(int i = 0; i<instance1.size()-1; i++){
 				Object attribute1 = instance1.get(i);
 				Object attribute2 = instance2.get(i);
 				// Doesn't change the distance if both attributes are equal
@@ -149,7 +150,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 					}
 				}
 			}
-			return Math.sqrt(distance);//TODO is the square right even if we consider Nominal attributes?
+			return Math.sqrt(distance);
 		}
 		else{
 			System.out.println("Distance cannot be computed, as both instances don't have the"
@@ -176,7 +177,8 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		// Do not consider missing values
 		double distance = 0.00;
 		if(instance1.size() == instance2.size()){
-			for(int i = 0; i<instance1.size(); i++){
+                        // Does not compute the distance between the class attributes!
+			for(int i = 0; i<instance1.size()-1; i++){
 				Object attribute1 = instance1.get(i);
 				Object attribute2 = instance2.get(i);
 				// Doesn't change the distance if both attributes are equal
