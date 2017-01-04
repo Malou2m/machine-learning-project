@@ -56,10 +56,11 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		Map<Object, Double> votes = new HashMap<Object, Double>();
 		for(Pair<List<Object>, Double> instance : subset){
 			Object i_class = instance.getA().get(getClassAttribute());
-			//votes.putIfAbsent(i_class, 0.00);
-			//TODO hier fehlt mir ein Ansatz zum bestimmen, verstehe aber die übergabeparameter auch nicht
-		}
-		throw new NotImplementedException();
+			votes.putIfAbsent(i_class, 0.00);
+			Double old_value = votes.get(i_class);
+			votes.replace(i_class, old_value+1);
+                }
+                return votes;
 	}
 
 	@Override
