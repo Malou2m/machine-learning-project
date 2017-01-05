@@ -54,13 +54,19 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 	@Override
 	protected Map<Object, Double> getWeightedVotes(List<Pair<List<Object>, Double>> subset) {
 		Map<Object, Double> votes = new HashMap<Object, Double>();
-		for(Pair<List<Object>, Double> instance : subset){
+		Double allWeights=0.0;
+		for(Pair<List<Object>, Double> instance : subset) {
 			Object i_class = instance.getA().get(getClassAttribute());
 			votes.putIfAbsent(i_class, 0.00);
 			Double old_value = votes.get(i_class);
-			votes.replace(i_class, old_value+1);
-                }
-                return votes;
+			Double instanceWeight=(1 / instance.getB());
+			votes.replace(i_class, old_value+instanceWeight);
+			allWeights+=instanceWeight;
+		}
+		for (Map.Entry<Object, Double> entry : votes.entrySet()){
+			votes.replace(entry.getKey(),entry.getValue()/allWeights);
+		}
+		return votes;
 	}
 
 	@Override
@@ -74,6 +80,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 				winner = entry.getKey();
 			}
 		}
+		System.out.println(winner);
 		return winner;
 	}
 
@@ -128,7 +135,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		double distance = 0.00;
 		if(instance1.size() == instance2.size()){
                         // Does not compute the distance between the class attributes!
-			for(int i = 0; i<instance1.size()-1; i++){
+			for(int i = 0; i<instance1.size(); i++){
 				Object attribute1 = instance1.get(i);
 				Object attribute2 = instance2.get(i);
 				// Doesn't change the distance if both attributes are equal
@@ -161,7 +168,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 	}
 
 	private Double[] getMinAndMax(int i) {
-		Double[] min_max = {999999.99, 0.00};
+		Double[] min_max = {Double.MAX_VALUE, 0.00};
 		for(List<Object> instance: data){
 			if((Double)instance.get(i) < min_max[0]){
 				min_max[0] = (Double)instance.get(i);
@@ -179,7 +186,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		double distance = 0.00;
 		if(instance1.size() == instance2.size()){
                         // Does not compute the distance between the class attributes!
-			for(int i = 0; i<instance1.size()-1; i++){
+			for(int i = 0; i<instance1.size(); i++){
 				Object attribute1 = instance1.get(i);
 				Object attribute2 = instance2.get(i);
 				// Doesn't change the distance if both attributes are equal
@@ -192,15 +199,22 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 					// difference for numeric attributes
 					else if(attribute1.getClass().equals(Double.class) &&
 							attribute2.getClass().equals(Double.class)){
+						Double doub1=new Double(attribute1.toString());
+						Double doub2=new Double(attribute2.toString());
+						Double save=doub1-doub2;
+						if(save<0){
+							save*=-1;
+						}
+						distance+=save;
 						// normalized numeric value
-						Double[] min_max = getMinAndMax(i);
+						/*Double[] min_max = getMinAndMax(i);
 						Double norm1 = ((Double)attribute1 - min_max[0])/(min_max[1] - min_max[0]);
 						Double norm2 = ((Double)attribute2 - min_max[0])/(min_max[1] - min_max[0]);
 						if(norm1 > norm2){
 							distance += norm1-norm2;
 						}else{
 							distance += norm2-norm1;
-						}
+						}*/
 					}
 					else{
 						System.out.println("Invalide attribute types or types does not match.");

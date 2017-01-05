@@ -29,8 +29,5 @@
             <artifactId>weka-stable</artifactId>
             <version>3.8.1</version>
         </dependency>
-
-
-
     </dependencies>
 </project>
