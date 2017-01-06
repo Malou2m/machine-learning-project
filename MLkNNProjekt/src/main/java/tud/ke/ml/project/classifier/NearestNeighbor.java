@@ -122,6 +122,8 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
  					if(instance.get(index) instanceof Double){
  						Double old = (Double) new Double(((Double) instance.get(index)).doubleValue());
  						Double newValue = (old + translation[index]) * scaling[index];
+						if (newValue.toString().equals("NaN"))
+							System.out.println("newval : " + newValue);
  						instance.set(index, newValue);
  					}
  				}
@@ -130,7 +132,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
  			System.out.println("After");
 			System.out.println("------------------------------------");
 			print();
-			
+
 
 		}
 		// Assign a distance to each instance
@@ -284,7 +286,9 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 
 		for(int i=0; i<size; i++){
  			translation[i] = -1 * min[i];
- 			scaling[i] = 1/(max[i] - min[i]);
+			double diff = (max[i] - min[i]);
+ 			scaling[i] = diff > 0 ? 1/diff : 1; // to avoid infinity
+
  		}
  		return new double[][] {scaling, translation};
 	}
