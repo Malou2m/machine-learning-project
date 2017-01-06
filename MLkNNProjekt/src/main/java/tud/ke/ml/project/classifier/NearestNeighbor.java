@@ -42,6 +42,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 	protected Map<Object, Double> getUnweightedVotes(List<Pair<List<Object>, Double>> subset) {
 		Map<Object, Double> votes = new HashMap<Object, Double>();
 		// Return the frequency distribution of each class in the given neighbours.
+                // => Majority voting
 		for(Pair<List<Object>, Double> instance : subset){
 			Object i_class = instance.getA().get(getClassAttribute());
 			votes.putIfAbsent(i_class, 0.00);
@@ -55,6 +56,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 	protected Map<Object, Double> getWeightedVotes(List<Pair<List<Object>, Double>> subset) {
 		Map<Object, Double> votes = new HashMap<Object, Double>();
 		Double allWeights=0.0;
+                // Inverted Distance weighting (sum of 1/distance for each Class)
 		for(Pair<List<Object>, Double> instance : subset) {
 			Object i_class = instance.getA().get(getClassAttribute());
 			votes.putIfAbsent(i_class, 0.00);
@@ -80,7 +82,6 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 				winner = entry.getKey();
 			}
 		}
-		System.out.println(winner);
 		return winner;
 	}
 
@@ -206,15 +207,6 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 							save*=-1;
 						}
 						distance+=save;
-						// normalized numeric value
-						/*Double[] min_max = getMinAndMax(i);
-						Double norm1 = ((Double)attribute1 - min_max[0])/(min_max[1] - min_max[0]);
-						Double norm2 = ((Double)attribute2 - min_max[0])/(min_max[1] - min_max[0]);
-						if(norm1 > norm2){
-							distance += norm1-norm2;
-						}else{
-							distance += norm2-norm1;
-						}*/
 					}
 					else{
 						System.out.println("Invalide attribute types or types does not match.");
