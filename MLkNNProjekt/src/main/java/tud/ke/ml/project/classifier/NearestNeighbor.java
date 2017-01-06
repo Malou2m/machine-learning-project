@@ -135,7 +135,6 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 				double[][] norm = normalizationScaling();
 				scaling = norm[0];
 				translation = norm[1];
-
 				//this.data
 				this.data.forEach(instance -> {
 					for (int index = 0; index < instance.size(); index++) {
@@ -170,16 +169,10 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 			}
 		}
 		// Sort the list of pairs (instance, distance) in ascending order
-		Collections.sort(instance_distance, new Comparator<Pair<List<Object>, Double>>() {
-			@Override
-		    public int compare(Pair<List<Object>, Double> p1, Pair<List<Object>, Double> p2) {
-		        if(p1.getB() < p2.getB()){
-		            return -1;
-		        } else {
-		            return 1;
-		        }
-		    }
-		});
+		Collections.sort(instance_distance, (p1, p2)->
+			    p1.getB() < p2.getB() ? -1 : 1
+		);
+
 		// get k nearest neighbours
 		for(int i=0; i<limit; i++){
 			nearests.add(instance_distance.get(i));
