@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
+import sun.reflect.generics.tree.DoubleSignature;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import tud.ke.ml.project.util.Pair;
 
@@ -30,7 +30,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
  * PLEASE INSERT YOUR MATRIKEL NUMBER HERE! 
  * 
  * ---------------------------------------------*/
-		return("2346827, joelHier, 2709600");
+		return("2346827, 2696768, 2709600");
 	}
 
 	@Override
@@ -100,6 +100,24 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		List<Pair<List<Object>, Double>> nearests = new ArrayList<Pair<List<Object>, Double>>();
 		List<Pair<List<Object>, Double>> instance_distance = new ArrayList<Pair<List<Object>, Double>>();
 		int limit = getkNearest();
+                // Normalization
+                double[] scaling=null,
+ 				translation = null;
+ 		if(isNormalizing()){
+ 			double[][] norm = normalizationScaling();
+ 			scaling = norm[0];
+ 			translation = norm[1];
+ 
+ 			for(List<Object> instance: this.data){
+ 				for(int index = 0; index<instance.size(); index++){
+ 					if(instance.get(index) instanceof Double){
+ 						Double old = (Double) instance.get(index);
+ 						Double newValue = (old - translation[index]) * scaling[index];
+ 						instance.set(index, newValue);
+ 					}
+ 				}
+ 			}
+ 		}
 		// Assign a distance to each instance
 		for(List<Object> instance : this.data){
 			if(instance != data){
@@ -224,7 +242,36 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 
 	@Override
 	protected double[][] normalizationScaling() {
-		throw new NotImplementedException();
+		int size = data.get(0).size();
+ 		double[] scaling = new double[size];
+ 		double[] translation =  new double[size];
+ 
+ 		double[] max = new double[size];
+ 		double[] min = new double[size];
+ 		for(int i = 0; i < size; i++){
+ 			max[i] = 0;
+ 			min[i] = Double.MAX_VALUE;
+ 		}
+ 
+ 		//getting max and min values for all attributes
+ 		for(List<Object> instance : data){
+ 			for(int i = 0; i< size; i++){
+ 				Object attr = instance.get(i);
+ 				if ( attr instanceof Double) {
+ 					Double d = (Double) attr;
+ 					if (min[i] > d)
+ 						min[i] = d;
+ 					if (max[i] < d)
+ 						max[i] = d;
+ 				}
+ 			}
+ 		}
+
+		for(int i=0; i<size; i++){
+ 			translation[i] = -1 * min[i];
+ 			scaling[i] = 1/(max[i] - min[i]);
+ 		}
+ 		return new double[][] {scaling, translation};
 	}
 
 }
