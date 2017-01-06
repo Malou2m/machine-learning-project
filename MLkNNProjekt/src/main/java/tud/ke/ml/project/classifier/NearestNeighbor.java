@@ -103,45 +103,33 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		List<Pair<List<Object>, Double>> instance_distance = new ArrayList<Pair<List<Object>, Double>>();
 		int limit = getkNearest();
 
+
 		//Normalizing
  		if(isNormalizing()){
 			if(scaling == null && translation == null) {
 				double[][] norm = normalizationScaling();
 				scaling = norm[0];
 				translation = norm[1];
-
-
-				/*
-				System.out.println("Before");
-				System.out.println("------------------------------------");
-				print();
-				*/
-				for (List<Object> instance : this.data) {
+				//this.data
+				this.data.forEach(instance -> {
 					for (int index = 0; index < instance.size(); index++) {
 						if (instance.get(index) instanceof Double) {
-							Double old = (Double) new Double(((Double) instance.get(index)).doubleValue());
+							Double old = (Double) instance.get(index);
 							Double newValue = (old + translation[index]) * scaling[index];
 							instance.set(index, newValue);
 						}
 					}
-				}
+				});
 			}
+			// incoming data
  			for(int index=0; index<data.size(); index++){
 				if(data.get(index) instanceof Double){
 
-					Double old = (Double) new Double(((Double) data.get(index)).doubleValue());
+					Double old = (Double) data.get(index);
 					Double newValue = (old + translation[index]) * scaling[index];
-/*					System.out.println(String.format("normalized[%d] %f to %f; scaling: %f, translation: %f", index, old, newValue, scaling[index], translation[index]));*/
 					data.set(index, newValue);
 				}
 			}
-/*			System.out.println("-------------------------------------\nnext");*/
-			/*
- 			System.out.println("After");
-			System.out.println("------------------------------------");
-			print();
-			*/
-
 		}
 		// Assign a distance to each instance
 		for(List<Object> instance : this.data){
@@ -152,7 +140,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 				}else {
 					d = determineManhattanDistance(instance, data);
 				}
-				instance_distance.add(new Pair<List<Object>, Double>(instance, d));
+				instance_distance.add(new Pair<>(instance, d));
 			}
 		}
 		// Sort the list of pairs (instance, distance) in ascending order
@@ -179,26 +167,23 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		double distance = 0.00;
 		if(instance1.size() == instance2.size()){
                         // Does not compute the distance between the class attributes!
-			for(int i = 0; i<instance1.size()-1; i++){
+			for(int i = 0; i<instance1.size(); i++){
+				if(i == getClassAttribute())
+					continue;
 				Object attribute1 = instance1.get(i);
 				Object attribute2 = instance2.get(i);
 				// Doesn't change the distance if both attributes are equal
 				if(!attribute1.equals(attribute2)){
 					// 0/1 Distance for nominal attributes
-					if(attribute1.getClass().equals(String.class) &&
-						attribute2.getClass().equals(String.class)){
+					if(attribute1 instanceof String && attribute2 instanceof String){
 						distance += 1;
 					}
 					// difference for numeric attributes
-					else if(attribute1.getClass().equals(Double.class) &&
-							attribute2.getClass().equals(Double.class)){
-							// normalized numeric value
-							Double doub1=new Double(attribute1.toString());
-							Double doub2=new Double(attribute2.toString());
-							distance+=Math.pow(doub1-doub2,2);
+					else if(attribute1 instanceof Double && attribute2 instanceof Double){
+							distance += Math.pow((Double)attribute1 - (Double)attribute2, 2);
 					}
 					else{
-						System.out.println("Invalide attribute types or types does not match.");
+						System.out.println("Invalid attribute types or types does not match.");
 					}
 				}
 			}
@@ -211,48 +196,29 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		}
 	}
 
-	private Double[] getMinAndMax(int i) {
-		Double[] min_max = {Double.MAX_VALUE, 0.00};
-		for(List<Object> instance: data){
-			if((Double)instance.get(i) < min_max[0]){
-				min_max[0] = (Double)instance.get(i);
-			}
-			if((Double)instance.get(i) > min_max[1]){
-				min_max[1] = (Double)instance.get(i);
-			}
-		}
-		return min_max;
-	}
-
 	@Override
 	protected double determineManhattanDistance(List<Object> instance1, List<Object> instance2) {
 		// Do not consider missing values
 		double distance = 0.00;
 		if(instance1.size() == instance2.size()){
                         // Does not compute the distance between the class attributes!
-			for(int i = 0; i<instance1.size()-1; i++){
+			for(int i = 0; i<instance1.size(); i++){
+				if(i == getClassAttribute())
+					continue;
 				Object attribute1 = instance1.get(i);
 				Object attribute2 = instance2.get(i);
 				// Doesn't change the distance if both attributes are equal
 				if(!attribute1.equals(attribute2)){
 					// 0/1 Distance for nominal attributes
-					if(attribute1.getClass().equals(String.class) &&
-							attribute2.getClass().equals(String.class)){
+					if(attribute1 instanceof String && attribute2 instanceof String){
 						distance += 1;
 					}
 					// difference for numeric attributes
-					else if(attribute1.getClass().equals(Double.class) &&
-							attribute2.getClass().equals(Double.class)){
-						Double doub1=new Double(attribute1.toString());
-						Double doub2=new Double(attribute2.toString());
-						Double save=doub1-doub2;
-						if(save<0){
-							save*=-1;
-						}
-						distance+=save;
+					else if(attribute1 instanceof Double && attribute2 instanceof Double){
+						distance += Math.abs((Double)attribute1 - (Double) attribute2);
 					}
 					else{
-						System.out.println("Invalide attribute types or types does not match.");
+						System.out.println("Invalid attribute types or types does not match.");
 					}
 				}
 			}
@@ -267,7 +233,6 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 
 	@Override
 	protected double[][] normalizationScaling() {
-		System.out.println("was here in normalizationScaling\n--------------");
 		int size = data.get(0).size();
  		double[] scaling = new double[size];
  		double[] translation =  new double[size];
