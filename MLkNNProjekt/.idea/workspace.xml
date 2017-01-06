@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/NearestNeighbor.java" line="137" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/NearestNeighbor.java" line="163" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/NearestNeighbor.java" line="111" mnemonic="7" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2f36458-2620-47f5-984d-8f5d2750bb40" name="Default" comment="" />
@@ -65,25 +66,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdvancedValidation.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdvancedValidation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/AdvancedValidation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
+            <state relative-caret-position="96">
+              <caret line="223" column="16" selection-start-line="223" selection-start-column="16" selection-end-line="223" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NearestNeighbor.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NearestNeighbor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/NearestNeighbor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="182" column="90" selection-start-line="182" selection-start-column="90" selection-end-line="182" selection-end-column="90" />
+            <state relative-caret-position="277">
+              <caret line="138" column="16" selection-start-line="138" selection-start-column="16" selection-end-line="138" selection-end-column="16" />
               <folding>
-                <element signature="e#4498#4775#0" expanded="false" />
-                <element signature="e#4774#4775#0" expanded="false" />
+                <element signature="e#4154#4182#0" expanded="true" />
+                <element signature="e#5561#5838#0" expanded="false" />
+                <element signature="e#5837#5838#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="INearestNeighbor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/INearestNeighbor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-327">
+              <caret line="124" column="30" selection-start-line="124" selection-start-column="30" selection-end-line="124" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -262,6 +274,10 @@
               <option name="myItemId" value="project" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -320,20 +336,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="classifier" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="knn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MLkNNProjekt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -399,27 +401,6 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="AdvancedValidation.testCorrectnessWeightedManhattank1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="knn" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AdvancedValidation" />
-      <option name="METHOD_NAME" value="testCorrectnessWeightedManhattank1" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
     <configuration default="false" name="AdvancedValidation.testCorrectnessWeightedEuclideank1normalized" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="knn" />
@@ -449,6 +430,27 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="AdvancedValidation" />
       <option name="METHOD_NAME" value="testCorrectnessNominalWeightedManhattank10Normalized" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="AdvancedValidation.testCorrectnessNominalUnweightedManhattank20" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="knn" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AdvancedValidation" />
+      <option name="METHOD_NAME" value="testCorrectnessNominalUnweightedManhattank20" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -709,17 +711,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="JUnit.AdvancedValidation" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.SimpleValidation" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessWeightedManhattank1" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessWeightedEuclideank1normalized" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessNominalWeightedManhattank10Normalized" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessWeightedEuclideank1normalized" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessNominalWeightedManhattank10Normalized" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessNominalUnweightedManhattank20" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="JUnit.SimpleValidation" />
         <item index="1" class="java.lang.String" itemvalue="JUnit.AdvancedValidation" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessNominalWeightedManhattank10Normalized" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessWeightedEuclideank1normalized" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessWeightedManhattank1" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessNominalUnweightedManhattank20" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessNominalWeightedManhattank10Normalized" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.AdvancedValidation.testCorrectnessWeightedEuclideank1normalized" />
       </list>
     </recent_temporary>
   </component>
@@ -743,34 +745,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AdvancedValidation - 2017.01.06 at 19h 13m 09s.xml">
+    <history-entry file="AdvancedValidation - 2017.01.06 at 20h 40m 28s.xml">
       <configuration name="AdvancedValidation" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdvancedValidation - 2017.01.06 at 19h 13m 36s.xml">
+    <history-entry file="AdvancedValidation - 2017.01.06 at 20h 42m 11s.xml">
       <configuration name="AdvancedValidation" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdvancedValidation - 2017.01.06 at 19h 13m 57s.xml">
+    <history-entry file="AdvancedValidation - 2017.01.06 at 20h 48m 51s.xml">
       <configuration name="AdvancedValidation" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdvancedValidation - 2017.01.06 at 19h 20m 20s.xml">
-      <configuration name="AdvancedValidation" configurationId="JUnit" />
+    <history-entry file="AdvancedValidation_testCorrectnessNominalUnweightedManhattank20 - 2017.01.06 at 20h 43m 24s.xml">
+      <configuration name="AdvancedValidation.testCorrectnessNominalUnweightedManhattank20" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdvancedValidation_testCorrectnessNominalWeightedManhattank10Normalized - 2017.01.06 at 18h 51m 50s.xml">
+    <history-entry file="AdvancedValidation_testCorrectnessNominalUnweightedManhattank20 - 2017.01.06 at 20h 43m 55s.xml">
+      <configuration name="AdvancedValidation.testCorrectnessNominalUnweightedManhattank20" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="AdvancedValidation_testCorrectnessNominalUnweightedManhattank20 - 2017.01.06 at 20h 44m 24s.xml">
+      <configuration name="AdvancedValidation.testCorrectnessNominalUnweightedManhattank20" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="AdvancedValidation_testCorrectnessNominalWeightedManhattank10Normalized - 2017.01.06 at 20h 18m 09s.xml">
       <configuration name="AdvancedValidation.testCorrectnessNominalWeightedManhattank10Normalized" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdvancedValidation_testCorrectnessNominalWeightedManhattank10Normalized - 2017.01.06 at 18h 53m 55s.xml">
+    <history-entry file="AdvancedValidation_testCorrectnessNominalWeightedManhattank10Normalized - 2017.01.06 at 20h 21m 56s.xml">
       <configuration name="AdvancedValidation.testCorrectnessNominalWeightedManhattank10Normalized" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdvancedValidation_testCorrectnessNominalWeightedManhattank10Normalized - 2017.01.06 at 19h 06m 12s.xml">
+    <history-entry file="AdvancedValidation_testCorrectnessNominalWeightedManhattank10Normalized - 2017.01.06 at 20h 40m 11s.xml">
       <configuration name="AdvancedValidation.testCorrectnessNominalWeightedManhattank10Normalized" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdvancedValidation_testCorrectnessNominalWeightedManhattank10Normalized - 2017.01.06 at 19h 07m 02s.xml">
-      <configuration name="AdvancedValidation.testCorrectnessNominalWeightedManhattank10Normalized" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SimpleValidation - 2017.01.06 at 19h 14m 07s.xml">
-      <configuration name="SimpleValidation" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SimpleValidation - 2017.01.06 at 19h 20m 28s.xml">
+    <history-entry file="SimpleValidation - 2017.01.06 at 20h 49m 14s.xml">
       <configuration name="SimpleValidation" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -779,7 +781,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -789,7 +791,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47481242" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32475883" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24115756" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -798,7 +800,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6334405" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -840,42 +842,17 @@
           <properties />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/NearestNeighbor.java</url>
-          <line>266</line>
-          <properties />
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/NearestNeighbor.java</url>
-          <line>247</line>
-          <properties />
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/NearestNeighbor.java</url>
-          <line>250</line>
-          <properties />
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/NearestNeighbor.java</url>
-          <line>255</line>
-          <properties />
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="49" />
+      <option name="time" value="50" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="testInstance.classValue()" language="JAVA" />
         <watch expression="testInstance.classValue()==myClass" language="JAVA" />
         <watch expression="classValue.toString()" language="JAVA" />
-        <watch expression="scaling" />
       </configuration>
     </watches-manager>
   </component>
@@ -1031,14 +1008,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/INearestNeighbor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="124" column="30" selection-start-line="124" selection-start-column="30" selection-end-line="124" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/nz/ac/waikato/cms/weka/weka-stable/3.8.1/weka-stable-3.8.1-sources.jar!/weka/filters/unsupervised/attribute/NominalToBinary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-336">
@@ -1063,22 +1032,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/AdvancedValidation.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/util/concurrent/atomic/AtomicInteger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
+        <state relative-caret-position="663">
+          <caret line="74" column="11" selection-start-line="74" selection-start-column="11" selection-end-line="74" selection-end-column="11" />
+          <folding>
+            <element signature="e#1762#1763#0" expanded="false" />
+            <element signature="e#1798#1799#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/util/function/Consumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/INearestNeighbor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-327">
+          <caret line="124" column="30" selection-start-line="124" selection-start-column="30" selection-end-line="124" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tud/ke/ml/project/classifier/NearestNeighbor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="182" column="90" selection-start-line="182" selection-start-column="90" selection-end-line="182" selection-end-column="90" />
+        <state relative-caret-position="277">
+          <caret line="138" column="16" selection-start-line="138" selection-start-column="16" selection-end-line="138" selection-end-column="16" />
           <folding>
-            <element signature="e#4498#4775#0" expanded="false" />
-            <element signature="e#4774#4775#0" expanded="false" />
+            <element signature="e#4154#4182#0" expanded="true" />
+            <element signature="e#5561#5838#0" expanded="false" />
+            <element signature="e#5837#5838#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/AdvancedValidation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="223" column="16" selection-start-line="223" selection-start-column="16" selection-end-line="223" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>

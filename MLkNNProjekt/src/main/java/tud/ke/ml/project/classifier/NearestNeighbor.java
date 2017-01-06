@@ -1,13 +1,9 @@
 package tud.ke.ml.project.classifier;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import sun.reflect.generics.tree.DoubleSignature;
@@ -78,12 +74,41 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		Object winner = null;
 		Double max = 0.00;
 		// Sets the class with maximal frequency as a winner
-		for(Entry<Object, Double> entry: votes.entrySet()){
-			if(entry.getValue() > max){
-				max = entry.getValue();
-				winner = entry.getKey();
-			}
-		}
+
+		//what is the maximal vote
+		Double maximal = votes.values().stream()
+				.mapToDouble(d -> d)
+				.max()
+				.getAsDouble();
+
+		//get all objects, which have this maximal value
+		Set<Object> winners = votes.entrySet().stream()
+				.filter(entry -> entry.getValue().doubleValue() == maximal.doubleValue())
+				.map(entry -> entry.getKey())
+				.collect(Collectors.toSet());
+
+		//if there is only one winner, return the winner;
+		if(winners.size() == 1)
+			return winners.toArray()[0];
+
+		//if there are multiple, count which is more often present in the whole dataset and return this one:
+
+		Map<Object, Integer> counter = new HashMap<>(winners.size()); //initialize a counter-map
+		winners.forEach(winnerAttr -> counter.put(winnerAttr.toString(), 0)); //initialize the counter
+
+		//iterate over the data set
+		this.data.stream()
+				.map(instance -> instance.get(getClassAttribute())) 							//extract all class-attributes
+				.filter(attr -> winners.contains(attr.toString()))								//extract only the necessary of the winner
+				.forEach(attr -> counter.put(attr.toString(),counter.get(attr.toString()) + 1));//count them
+
+		//choose the biggest
+		winner = counter.entrySet().stream()
+				.reduce((a, b) -> a.getValue() > b.getValue() ? a : b)
+				.get()
+				.getKey();
+
+		//and finally return
 		return winner;
 	}
 
@@ -110,6 +135,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 				double[][] norm = normalizationScaling();
 				scaling = norm[0];
 				translation = norm[1];
+
 				//this.data
 				this.data.forEach(instance -> {
 					for (int index = 0; index < instance.size(); index++) {
@@ -166,10 +192,9 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		// Do not consider missing values
 		double distance = 0.00;
 		if(instance1.size() == instance2.size()){
-                        // Does not compute the distance between the class attributes!
 			for(int i = 0; i<instance1.size(); i++){
 				if(i == getClassAttribute())
-					continue;
+					continue;// Does not compute the distance between the class attributes!
 				Object attribute1 = instance1.get(i);
 				Object attribute2 = instance2.get(i);
 				// Doesn't change the distance if both attributes are equal
@@ -201,10 +226,10 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		// Do not consider missing values
 		double distance = 0.00;
 		if(instance1.size() == instance2.size()){
-                        // Does not compute the distance between the class attributes!
+
 			for(int i = 0; i<instance1.size(); i++){
 				if(i == getClassAttribute())
-					continue;
+					continue;// Does not compute the distance between the class attributes!
 				Object attribute1 = instance1.get(i);
 				Object attribute2 = instance2.get(i);
 				// Doesn't change the distance if both attributes are equal
