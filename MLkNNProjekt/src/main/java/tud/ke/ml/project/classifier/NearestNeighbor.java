@@ -135,7 +135,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		double distance = 0.00;
 		if(instance1.size() == instance2.size()){
                         // Does not compute the distance between the class attributes!
-			for(int i = 0; i<instance1.size(); i++){
+			for(int i = 0; i<instance1.size()-1; i++){
 				Object attribute1 = instance1.get(i);
 				Object attribute2 = instance2.get(i);
 				// Doesn't change the distance if both attributes are equal
@@ -186,7 +186,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		double distance = 0.00;
 		if(instance1.size() == instance2.size()){
                         // Does not compute the distance between the class attributes!
-			for(int i = 0; i<instance1.size(); i++){
+			for(int i = 0; i<instance1.size()-1; i++){
 				Object attribute1 = instance1.get(i);
 				Object attribute2 = instance2.get(i);
 				// Doesn't change the distance if both attributes are equal
