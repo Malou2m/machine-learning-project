@@ -109,32 +109,33 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 				double[][] norm = normalizationScaling();
 				scaling = norm[0];
 				translation = norm[1];
-			}
 
-			/*
-			System.out.println("Before");
-			System.out.println("------------------------------------");
-			print();
-			*/
- 			for(List<Object> instance: this.data){
- 				for(int index = 0; index<instance.size(); index++){
- 					if(instance.get(index) instanceof Double){
- 						Double old = (Double) new Double(((Double) instance.get(index)).doubleValue());
- 						Double newValue = (old + translation[index]) * scaling[index];
- 						instance.set(index, newValue);
- 					}
- 				}
- 			}
+
+				/*
+				System.out.println("Before");
+				System.out.println("------------------------------------");
+				print();
+				*/
+				for (List<Object> instance : this.data) {
+					for (int index = 0; index < instance.size(); index++) {
+						if (instance.get(index) instanceof Double) {
+							Double old = (Double) new Double(((Double) instance.get(index)).doubleValue());
+							Double newValue = (old + translation[index]) * scaling[index];
+							instance.set(index, newValue);
+						}
+					}
+				}
+			}
  			for(int index=0; index<data.size(); index++){
 				if(data.get(index) instanceof Double){
 
 					Double old = (Double) new Double(((Double) data.get(index)).doubleValue());
 					Double newValue = (old + translation[index]) * scaling[index];
-					System.out.println(String.format("normalized[%d] %f to %f; scaling: %f, translation: %f", index, old, newValue, scaling[index], translation[index]));
+/*					System.out.println(String.format("normalized[%d] %f to %f; scaling: %f, translation: %f", index, old, newValue, scaling[index], translation[index]));*/
 					data.set(index, newValue);
 				}
 			}
-			System.out.println("-------------------------------------\nnext");
+/*			System.out.println("-------------------------------------\nnext");*/
 			/*
  			System.out.println("After");
 			System.out.println("------------------------------------");
