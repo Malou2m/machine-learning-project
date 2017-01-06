@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
 import sun.reflect.generics.tree.DoubleSignature;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import tud.ke.ml.project.util.Pair;
@@ -30,7 +32,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
  * PLEASE INSERT YOUR MATRIKEL NUMBER HERE! 
  * 
  * ---------------------------------------------*/
-		return("2346827, 2696768, 2709600");
+		return("2346827,2696768,2709600");
 	}
 
 	@Override
@@ -100,6 +102,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		List<Pair<List<Object>, Double>> nearests = new ArrayList<Pair<List<Object>, Double>>();
 		List<Pair<List<Object>, Double>> instance_distance = new ArrayList<Pair<List<Object>, Double>>();
 		int limit = getkNearest();
+
                 // Normalization
                 double[] scaling=null,
  				translation = null;
@@ -107,17 +110,29 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
  			double[][] norm = normalizationScaling();
  			scaling = norm[0];
  			translation = norm[1];
- 
+
+
+
+			System.out.println("Before");
+			System.out.println("------------------------------------");
+			print();
+
  			for(List<Object> instance: this.data){
  				for(int index = 0; index<instance.size(); index++){
  					if(instance.get(index) instanceof Double){
- 						Double old = (Double) instance.get(index);
- 						Double newValue = (old - translation[index]) * scaling[index];
+ 						Double old = (Double) new Double(((Double) instance.get(index)).doubleValue());
+ 						Double newValue = (old + translation[index]) * scaling[index];
  						instance.set(index, newValue);
  					}
  				}
  			}
- 		}
+
+ 			System.out.println("After");
+			System.out.println("------------------------------------");
+			print();
+			
+
+		}
 		// Assign a distance to each instance
 		for(List<Object> instance : this.data){
 			if(instance != data){
@@ -272,6 +287,9 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
  			scaling[i] = 1/(max[i] - min[i]);
  		}
  		return new double[][] {scaling, translation};
+	}
+	void print(){
+		this.data.subList(0,100).forEach(instance -> System.out.println("[" + instance.stream().filter(obj -> obj instanceof  Double).map(obj -> String.format("%.4f", obj)).collect(Collectors.joining("\t")) + "]"));
 	}
 
 }
