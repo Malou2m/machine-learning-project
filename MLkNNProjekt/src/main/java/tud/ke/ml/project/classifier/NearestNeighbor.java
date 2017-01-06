@@ -103,36 +103,43 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 		List<Pair<List<Object>, Double>> instance_distance = new ArrayList<Pair<List<Object>, Double>>();
 		int limit = getkNearest();
 
-                // Normalization
-                double[] scaling=null,
- 				translation = null;
+		//Normalizing
  		if(isNormalizing()){
- 			double[][] norm = normalizationScaling();
- 			scaling = norm[0];
- 			translation = norm[1];
+			if(scaling == null && translation == null) {
+				double[][] norm = normalizationScaling();
+				scaling = norm[0];
+				translation = norm[1];
+			}
 
-
-
+			/*
 			System.out.println("Before");
 			System.out.println("------------------------------------");
 			print();
-
+			*/
  			for(List<Object> instance: this.data){
  				for(int index = 0; index<instance.size(); index++){
  					if(instance.get(index) instanceof Double){
  						Double old = (Double) new Double(((Double) instance.get(index)).doubleValue());
  						Double newValue = (old + translation[index]) * scaling[index];
-						if (newValue.toString().equals("NaN"))
-							System.out.println("newval : " + newValue);
  						instance.set(index, newValue);
  					}
  				}
  			}
+ 			for(int index=0; index<data.size(); index++){
+				if(data.get(index) instanceof Double){
 
+					Double old = (Double) new Double(((Double) data.get(index)).doubleValue());
+					Double newValue = (old + translation[index]) * scaling[index];
+					System.out.println(String.format("normalized[%d] %f to %f; scaling: %f, translation: %f", index, old, newValue, scaling[index], translation[index]));
+					data.set(index, newValue);
+				}
+			}
+			System.out.println("-------------------------------------\nnext");
+			/*
  			System.out.println("After");
 			System.out.println("------------------------------------");
 			print();
-
+			*/
 
 		}
 		// Assign a distance to each instance
@@ -259,6 +266,7 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 
 	@Override
 	protected double[][] normalizationScaling() {
+		System.out.println("was here in normalizationScaling\n--------------");
 		int size = data.get(0).size();
  		double[] scaling = new double[size];
  		double[] translation =  new double[size];
