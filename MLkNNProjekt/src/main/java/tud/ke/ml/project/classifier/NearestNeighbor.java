@@ -73,7 +73,6 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 	@Override
 	protected Object getWinner(Map<Object, Double> votes) {
 		Object winner = null;
-		Double max = 0.00;
 		// Sets the class with maximal frequency as a winner
 
 		//what is the maximal vote
