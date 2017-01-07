@@ -3,6 +3,7 @@ package tud.ke.ml.project.classifier;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -124,10 +125,6 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 
 	@Override
 	protected List<Pair<List<Object>, Double>> getNearest(List<Object> data) {
-		List<Pair<List<Object>, Double>> nearests = new ArrayList<Pair<List<Object>, Double>>();
-		List<Pair<List<Object>, Double>> instance_distance = new ArrayList<Pair<List<Object>, Double>>();
-		int limit = getkNearest();
-
 
 		//Normalizing
  		if(isNormalizing()){
@@ -156,6 +153,9 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 				}
 			}
 		}
+
+
+		List<Pair<List<Object>, Double>> instance_distance = new ArrayList<>();
 		// Assign a distance to each instance
 		for(List<Object> instance : this.data){
 			if(instance != data){
@@ -173,10 +173,26 @@ public class NearestNeighbor extends INearestNeighbor implements Serializable {
 			    p1.getB() < p2.getB() ? -1 : 1
 		);
 
-		// get k nearest neighbours
-		for(int i=0; i<limit; i++){
-			nearests.add(instance_distance.get(i));
+		Map<Double, Set<List<Object>>> ObjectsByDistance = new LinkedHashMap<>(); //to maintain order
+
+		instance_distance.forEach(pair -> {								//for the sorted list of instances, now store it in a map of sets, where the key is the distance, and the value are all the same-distance-length'ed instances
+			if(!ObjectsByDistance.containsKey(pair.getB()))				//if not already added,
+				ObjectsByDistance.put(pair.getB(), new HashSet<>());	//add a new set
+			ObjectsByDistance.get(pair.getB()).add(pair.getA());		//and finally add the instance
+		});
+
+
+		List<Pair<List<Object>, Double>> nearests = new ArrayList<>();
+		int k = getkNearest();
+
+		for(Entry<Double, Set<List<Object>>> entry : ObjectsByDistance.entrySet()){ //iterate over all same-distance-length instances
+			entry.getValue().forEach(instance -> { //for one particular distance, add all instances to the result list
+				nearests.add(new Pair<>(instance, entry.getKey()));
+			});
+			if(nearests.size() >= k) //check, if more instances need to be added
+				break;	//if not, break out
 		}
+
 		return nearests;
 	}
 
