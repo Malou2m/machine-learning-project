@@ -1,0 +1,101 @@
+\documentclass[11pt, oneside]{article}   	
+\usepackage{geometry}                	
+\geometry{letterpaper}                   	 
+\usepackage{graphicx}	
+
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}			
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\renewcommand{\algorithmicforall}{\textbf{for each}}
+\makeatother					
+									
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\restylefloat{table}
+\restylefloat{algorithm}
+
+
+\title{Theoriefragen zur Implementationsaufgabe}
+\author{K\"upper Joel,
+Ockenfels Malou,
+Schulz Daniel}
+
+\begin{document}
+\maketitle
+
+\section{5.3) Normalization and Tie-Breaking}
+\subsection{a) Entscheidungsfunktion für getWinner}
+Problem: \textit{Es kann vorkommen, dass mehr als eine Klasse am meisten Stimmen von den Nachbarn bekommen hat. Welche Klasse soll dann ausgewählt werden?}\newline
+Die Idee ist, dass falls mehr als eine Klasse am meisten Stimmen bekommen hat, jene klasse ausgewählt wird, die generell im Data-set am meisten vorkommt. 
+Somit ist die Wahrscheinlichkeit, richtig zu liegen, am höchsten.
+Den Fall, dass die beiden \emph{gewinnenden} Klassen auch gleichzeitig gleich häufig im Data-set vorkommen wird hier in der Implementierung nicht beachtet, da die Wahrscheinlichkeit doch sehr gering ist, vorallem bei den vorliegenden Data-sets.\newline
+Für diesen Fall könnte jedoch so vorgegangen werden, dass jene Klasse vorhergesagt wird, die am nächsten (k=1, =2, ...) am Beispiel liegt.
+Dann gibt es aber Probleme bei zu hohem Rauschen in den Data-sets.\newline
+Eine weitere Möglichkeit wäre, dass man k+=1 inkrementiert und so einen weiteren Nachbarn (oder zwei, drei, ...) hinzuzieht, um eine eindeutigere Mehrheit zu finden. 
+Dabei tritt aber das Problem der zu generrellen Vorhersage auf. 
+Da in der Aufgabe keine Angabe über jene Priorisierung gemacht wurde, werden die Denkansätze hier nur erähnt und nicht implementiert.\newline
+Der folgende Pseudocode illustriert, wie das Zählen umgesetzt wurde.
+
+\begin{algorithm}[H]
+\caption{getWinner Entscheidungsfunktion}\label{euclid}
+\begin{algorithmic}[1]
+\Function{getWinner}{data, votes}
+\State $max \gets votes.getHighestVote()$
+\State $classesWithMaxVotes \gets null$
+\ForAll{$vote \in votes$}
+\If{vote.numberOfVotes() == max}
+	\State $classesWithMaxVotes.add(vote);$
+\EndIf
+\EndFor
+\If{classesWithMaxVotes.size == 1}
+	\State $return \gets classesWithMaxVotes.first();$
+\Else
+	\State $counter.init(0);$
+	\ForAll{$instance \in data$}
+		\If{classesWithMaxVotes.contains(instance.getClass())}
+			\State $counter.incrementClass(instance.getClass());$
+		\EndIf
+	\EndFor
+\EndIf
+\State $return \gets counter.getBiggest().getClass();$
+
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+\pagebreak
+
+\subsection{c) Gleicher Abstand mehrerer Instanzen}
+Problem: \textit{Es kann vorkommen, dass mehrere Instanzen den glichen Abstand vom Beispiel haben. Wie soll dabei vorgegangen werden?}\newline
+Das ist prinzipiell nur ein Problem, wenn der k'te Nachbar den gleichen Abstand hat wie k+1, k+2, ... 
+Wenn die Nachbarn eins und zwei bspw. bei k=4 den gleichen Abstand haben, gibt es kein Problem.\newline
+Nun, hier ist die Idee, wie oben schon beschrieben, aber nun unausweichlich, k zu inkrementieren und alle Nachbarn, die den gleichen Abstand haben wie der k'te Nachbar auch noch als nearst Neighbor zu bezeichnen und entsprechend zu berücksichtigen.\newline
+Auch hier der Preudocode, wie es umgesetzt wurde:
+
+\begin{algorithm}[H]
+\caption{getNearest Entscheidungsfunktion}\label{euclid}
+\begin{algorithmic}[1]
+\Function{getNearest}{sortedListOfNeighbors, k}
+
+\State $sortedNeighborsByDistance \gets null;$
+\ForAll{$neighbor \in sortedListOfNeighbors$}
+	\State $sortedNeighborsByDistance.addAt(neighbor.getDistance(), neighbor);$
+\EndFor
+\State $nearests \gets null;$
+\ForAll{$setOfNeighborsWithSameDistance \in sortedNeighborsByDistance$}
+	\State $nearests.addAll(setOfNeighborsWithSameDistance);$
+	\If{$nearest.size() >= k$}
+		\State break;
+	\EndIf
+\EndFor
+\State $return \gets nearests;$
+
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}
+
