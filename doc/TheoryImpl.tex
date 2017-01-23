@@ -30,7 +30,7 @@ Schulz Daniel}
 \section{5.3) Normalization and Tie-Breaking}
 \subsection{a) Entscheidungsfunktion für getWinner}
 Problem: \textit{Es kann vorkommen, dass mehr als eine Klasse am meisten Stimmen von den Nachbarn bekommen hat. Welche Klasse soll dann ausgewählt werden?}\newline
-Die Idee ist, dass falls mehr als eine Klasse am meisten Stimmen bekommen hat, jene klasse ausgewählt wird, die generell im Data-set am meisten vorkommt. 
+Die Idee ist, dass falls mehr als eine Klasse am meisten Stimmen bekommen hat, jene klasse ausgewählt wird, die generell im Data-set am Meisten vorkommt. 
 Somit ist die Wahrscheinlichkeit, richtig zu liegen, am höchsten.
 Den Fall, dass die beiden \emph{gewinnenden} Klassen auch gleichzeitig gleich häufig im Data-set vorkommen wird hier in der Implementierung nicht beachtet, da die Wahrscheinlichkeit doch sehr gering ist, vorallem bei den vorliegenden Data-sets.\newline
 Für diesen Fall könnte jedoch so vorgegangen werden, dass jene Klasse vorhergesagt wird, die am nächsten (k=1, =2, ...) am Beispiel liegt.
@@ -69,11 +69,12 @@ Der folgende Pseudocode illustriert, wie das Zählen umgesetzt wurde.
 \pagebreak
 
 \subsection{c) Gleicher Abstand mehrerer Instanzen}
-Problem: \textit{Es kann vorkommen, dass mehrere Instanzen den glichen Abstand vom Beispiel haben. Wie soll dabei vorgegangen werden?}\newline
+Problem: \textit{Es kann vorkommen, dass mehrere Instanzen den gleichen Abstand vom Beispiel haben. Wie soll dabei vorgegangen werden?}\newline
 Das ist prinzipiell nur ein Problem, wenn der k'te Nachbar den gleichen Abstand hat wie k+1, k+2, ... 
 Wenn die Nachbarn eins und zwei bspw. bei k=4 den gleichen Abstand haben, gibt es kein Problem.\newline
+Erst wenn Nachbar k und Nachbar k+1 den gleichen Abstand und unterschiedliche Klassen haben, gibt es Entscheidungsbedarf.
 Nun, hier ist die Idee, wie oben schon beschrieben, aber nun unausweichlich, k zu inkrementieren und alle Nachbarn, die den gleichen Abstand haben wie der k'te Nachbar auch noch als nearst Neighbor zu bezeichnen und entsprechend zu berücksichtigen.\newline
-Auch hier der Preudocode, wie es umgesetzt wurde:
+Auch hier der Pseudocode, wie es umgesetzt wurde:
 
 \begin{algorithm}[H]
 \caption{getNearest Entscheidungsfunktion}\label{euclid}
